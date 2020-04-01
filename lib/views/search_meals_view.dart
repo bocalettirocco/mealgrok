@@ -19,6 +19,7 @@ class _SearchMealsViewState extends State<SearchMealsView> {
 
   final duplicateItems = List<String>.generate(10000, (i) => "Item $i");
   var items = List<String>();
+  String searchTerm = '';
 
   @override
   void initState() {
@@ -41,6 +42,12 @@ class _SearchMealsViewState extends State<SearchMealsView> {
     }
   }
 
+  _searchMeals(String term) {
+    setState(() {
+      searchTerm = term;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +68,7 @@ class _SearchMealsViewState extends State<SearchMealsView> {
               padding: const EdgeInsets.all(8.0),
               child: TextField(
                 onChanged: (value) {
-                  
+                  _searchMeals(value);
                 },
                 controller: editingController,
                 decoration: InputDecoration(
@@ -83,9 +90,13 @@ class _SearchMealsViewState extends State<SearchMealsView> {
                     shrinkWrap: true,
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text('${snapshot.data[index].name}'),
-                      );
+                      if (searchTerm == '' || snapshot.data[index].name.toLowerCase().contains(searchTerm.toLowerCase())) {
+                        return ListTile(
+                          title: Text('${snapshot.data[index].name}'),
+                        );
+                      } else {
+                        return Container();
+                      } 
                     },
                   );
                 }
