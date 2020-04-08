@@ -20,6 +20,6 @@ class FoodController {
       ),
     ];
     
-    return Future.delayed(const Duration(seconds: 1), () => data);
+    return Future.delayed(const Duration(milliseconds: 1), () => data);
   }
 }

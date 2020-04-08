@@ -3,14 +3,20 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:mealgrok/models/nutrient.dart';
 import 'package:mealgrok/controllers/nutrient_controller.dart';
 
-
-
 class NutrientGraph extends StatelessWidget {
   static const String graphId = 'nutrients';
 
   @override
   Widget build(BuildContext context) {
-    
+    var nutrient = Nutrient(
+        value: 150,
+        limit: 150,
+        units: 'mg',
+        nutrientName: 'potassium',
+    );
+
+    NutrientController.createNutrient(nutrient, DateTime.now());
+
     return FutureBuilder(
       future: NutrientController.getNutrients(DateTime.now()),
       builder: (context, snapshot) {

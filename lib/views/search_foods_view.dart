@@ -38,7 +38,7 @@ class _SearchFoodsViewState extends State<SearchFoodsView> {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(16.0),
               child: TextField(
                 onChanged: (value) {
                   

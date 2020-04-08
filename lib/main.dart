@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:mealgrok/views/graph_view.dart';
+import 'package:flutter/services.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:mealgrok/app.dart';
 
-void main() => runApp(App());
+void main() async {
+  const String schemaPath = 'assets/schema.sql';
+  const String dbName = 'mealgrok.db';
+  
+  WidgetsFlutterBinding.ensureInitialized();
 
-class App extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'MealGrok',
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-      ),
-      home: GraphView(title: 'MealGrok', tooltip: 'Add a meal'),
-    );
-  }
+  await deleteDatabase(dbName);
+
+  final String schema = await rootBundle.loadString(schemaPath);
+
+  final bool skipWelcomePage =  await databaseExists(dbName); 
+  
+  Database db = await openDatabase(
+    dbName, version: 1, onCreate: (Database db, int version) async {
+      await db.execute(schema);
+    }
+  );
+  
+  await db.close();
+
+  runApp(App());
 }

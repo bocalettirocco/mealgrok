@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS nutrient(id INTEGER PRIMARY KEY AUTOINCREMENT, val INTEGER, lim INTEGER, nutrient_name TEXT, units TEXT, date_tracked DATETIME);

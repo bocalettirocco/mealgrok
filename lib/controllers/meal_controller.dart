@@ -22,7 +22,6 @@ class MealController {
         foods: await FoodController.getFoods(DateTime.now()),
       ),
     ];
-    print('returning data from meal controller');
-    return Future.delayed(const Duration(milliseconds: 3), () => data);
+    return Future.delayed(const Duration(milliseconds: 1), () => data);
   }
 }

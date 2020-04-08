@@ -42,10 +42,16 @@ class _SearchMealsViewState extends State<SearchMealsView> {
     }
   }
 
-  _searchMeals(String term) {
+  void _searchMeals(String term) {
     setState(() {
       searchTerm = term;
     });
+  }
+
+  Widget _mealTile(String name) {
+    return ListTile(
+      title: Text(name),
+    );
   }
 
   @override
@@ -65,7 +71,7 @@ class _SearchMealsViewState extends State<SearchMealsView> {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(16),
               child: TextField(
                 onChanged: (value) {
                   _searchMeals(value);
@@ -91,9 +97,7 @@ class _SearchMealsViewState extends State<SearchMealsView> {
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
                       if (searchTerm == '' || snapshot.data[index].name.toLowerCase().contains(searchTerm.toLowerCase())) {
-                        return ListTile(
-                          title: Text('${snapshot.data[index].name}'),
-                        );
+                        return _mealTile(snapshot.data[index].name);
                       } else {
                         return Container();
                       } 

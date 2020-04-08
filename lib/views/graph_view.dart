@@ -44,7 +44,7 @@ class _GraphViewState extends State<GraphView> {
         ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       floatingActionButton: Padding(
-        padding: const EdgeInsets.only(top: 50.0),
+        padding: const EdgeInsets.only(top: 70.0),
         child: FloatingActionButton.extended(
           onPressed: () => _navigateToFormAndDisplayResult(context),
           tooltip: widget.tooltip,
